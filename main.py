@@ -1,8 +1,3 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
 import os
 import glob
 import datetime
@@ -13,18 +8,27 @@ from tqdm import tqdm
 
 
 def csv_to_xlsx():
+    # 1. directory 선택
     root_dir_name = filedialog.askdirectory()
+    
+    # 2. 결과 파일 저장 경로 설정
     target_root_dir = os.getcwd()
     target_save_dir = target_root_dir + '/conv_data/'
+    
     if not os.path.exists(target_save_dir):
         os.makedirs(target_save_dir)
     current_datetime = datetime.datetime.now()
     target_save_dir_datetime = target_save_dir + datetime.datetime.strftime(current_datetime, '%Y%m%d') + '/' + datetime.datetime.strftime(current_datetime, '%H%M%S') + '/'
+    
     if not os.path.exists(target_save_dir_datetime):
         os.makedirs(target_save_dir_datetime)
+    
+    # 변환할 csv 파일 리스트업
     root_dir_name_target = root_dir_name + '/**/*.csv'
     csv_file_list = glob.glob(root_dir_name_target, recursive=True)
     pbar = tqdm(range(len(csv_file_list)), desc="Converting .csv file to .xlsx file format...", mininterval=1)
+        
+    # 변환 및 저장
     for file_idx in pbar:
         save_file_str = os.path.basename(csv_file_list[file_idx])
         save_dir_str = os.path.dirname(csv_file_list[file_idx])
