@@ -3,7 +3,6 @@ import glob
 import datetime
 from tkinter import filedialog
 import pandas as pd
-import openpyxl
 from tqdm import tqdm
 
 
